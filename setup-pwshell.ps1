@@ -19,7 +19,7 @@ Invoke-WebRequest 'https://www.dropbox.com/scl/fi/ztih8g597da374n11ndor/kernel.z
 "Downloading kernel... Done!"
 Expand-Archive -LiteralPath .\kernel.zip -DestinationPath .\kernel
 mkdir C:\Sources
-cp .\kernel\vmlinux C:\Sources\vmlinux
+cp .\kernel\vmlinux C:\Sources\vmlinu
 rm .\kernel
 rm .\kernel.zip
 

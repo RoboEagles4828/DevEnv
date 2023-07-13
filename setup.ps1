@@ -1,1 +1,1 @@
-Start-Process powershell -verb runas -ArgumentList "-file ${pwd}/setup-pwshell.ps1 -executionpolicy bypass"
+Start-Process powershell -verb runas -ArgumentList "-file ${pwd}/setup-pwshell.ps1"
