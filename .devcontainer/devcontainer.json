@@ -1,0 +1,41 @@
+{
+    "name": "DevEnv",
+    "image": "ghcr.io/roboeagles4828/developer-environment:6",
+    "containerEnv": {
+        "SHELL": "/usr/bin/zsh",
+        "ROS_DOMAIN_ID": "0",
+        "FASTRTPS_DEFAULT_PROFILES_FILE": "/usr/local/share/middleware_profiles/rtps_udp_profile.xml",
+        "WORKSPACE_LOCAL_PATH": "${localWorkspaceFolder}",
+        "PYTHONWARNINGS": "ignore:::setuptools.command.install,ignore:::setuptools.command.easy_install,ignore:::pkg_resources"
+    },
+    
+    "postCreateCommand": "sh .devcontainer/postCreate.sh",
+    "postStartCommand": " sh .devcontainer/postStart.sh",
+    "initializeCommand": "sh .devcontainer/init.sh",
+    "securityOpt": [ "seccomp=unconfined" ],
+    "capAdd": ["SYS_PTRACE"],
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind", // docker
+        "source=${localEnv:HOME}/docker/vscode,target=/home/admin/.vscode-server,type=bind", // vscode
+        "source=${localEnv:HOME}/.ssh,target=/home/admin/.ssh,type=bind" // vscode
+    ],
+    "runArgs": [
+		"--privileged",
+        "--net", "host",
+        "-e", "DISPLAY=${env:DISPLAY}",
+		"-v", "${env:HOME}/.Xauthority:/mnt/.Xauthority",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+	],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-iot.vscode-ros",
+				"GitHub.copilot",
+				"eamodio.gitlens",
+				"appulate.filewatcher",
+				"formulahendry.code-runner",
+			]
+        }
+    }
+}
