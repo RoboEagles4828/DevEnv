@@ -1,6 +1,0 @@
-[wsl2]
-memory=16GB
-swap=100GB
-kernel = C:\\Sources\\vmlinux
-#networkingMode = bridged
-#vmSwitch = WSL2

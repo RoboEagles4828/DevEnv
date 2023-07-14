@@ -24,7 +24,7 @@ rm .\kernel
 rm .\kernel.zip
 
 "Setting up WSLconfig..."
-mv .\.wslconfig C:\Users\$Env:UserName\.wslconfig
+cp .\.wslconfig C:\Users\$Env:UserName\.wslconfig
 "Setting up WSLconfig... Done!"
 
 "Install winget apps...!"
@@ -35,4 +35,5 @@ winget install usbipd
 "Install winget apps... Done!"
 
 "Setting up VSCode..."
-Start-Process powershell -verb runas -ArgumentList "-file ${pwd}/code-setup.ps1"
+Start-Process powershell -verb runas -ArgumentList "-file ${pwd}/code-setup.ps1" -WorkingDirectory ${pwd}
+```
