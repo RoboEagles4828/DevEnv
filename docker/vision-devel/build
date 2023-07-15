@@ -1,10 +1,10 @@
 #!/bin/bash
 
 GITHUB_REGISTRY="ghcr.io/roboeagles4828"
-VERSION="4.0-devel-cuda12.1-ubuntu22.04"
+VERSION="1"
 IMAGE_NAME="vision-devel:$VERSION"
 
-docker build -t $GITHUB_REGISTRY/$IMAGE_NAME --cache-from $GITHUB_REGISTRY/$IMAGE_NAME .
+docker build -t $GITHUB_REGISTRY/$IMAGE_NAME --cache-from $GITHUB_REGISTRY/$IMAGE_NAME . 
 
 echo "Build finished"
 
