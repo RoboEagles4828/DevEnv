@@ -8,6 +8,10 @@
         "WORKSPACE_LOCAL_PATH": "${localWorkspaceFolder}",
         "PYTHONWARNINGS": "ignore:::setuptools.command.install,ignore:::setuptools.command.easy_install,ignore:::pkg_resources"
     },
+     "remoteEnv": {
+        "DISPLAY": ":0",
+        "PATH": "${containerWorkspaceFolder}/scripts:${containerEnv:PATH}"
+    },
     
     "postCreateCommand": "sh .devcontainer/postCreate.sh",
     "postStartCommand": " sh .devcontainer/postStart.sh",
@@ -22,7 +26,7 @@
     "runArgs": [
 		"--privileged",
         "--net", "host",
-        "-e", "DISPLAY=${env:DISPLAY}",
+        "-e", "DISPLAY=:0",
 		"-v", "${env:HOME}/.Xauthority:/mnt/.Xauthority",
         "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
 	],
