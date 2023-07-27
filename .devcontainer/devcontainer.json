@@ -1,6 +1,8 @@
 {
     "name": "DevEnv",
-    "image": "ghcr.io/roboeagles4828/developer-environment:6",
+    "image": "ghcr.io/roboeagles4828/developer-environment:7",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/DevEnv,type=bind",
+    "workspaceFolder": "/workspace/DevEnv",
     "containerEnv": {
         "SHELL": "/usr/bin/zsh",
         "ROS_DOMAIN_ID": "0",
@@ -28,7 +30,7 @@
         "--net", "host",
         "-e", "DISPLAY=:0",
 		"-v", "${env:HOME}/.Xauthority:/mnt/.Xauthority",
-        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+        // "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
 	],
     "customizations": {
         "vscode": {
