@@ -1,12 +1,18 @@
 {
     "name": "DevEnv",
-    "image": "ghcr.io/roboeagles4828/developer-environment:6",
+    "image": "ghcr.io/roboeagles4828/developer-environment:7",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/DevEnv,type=bind",
+    "workspaceFolder": "/workspace/DevEnv",
     "containerEnv": {
         "SHELL": "/usr/bin/zsh",
         "ROS_DOMAIN_ID": "0",
         "FASTRTPS_DEFAULT_PROFILES_FILE": "/usr/local/share/middleware_profiles/rtps_udp_profile.xml",
         "WORKSPACE_LOCAL_PATH": "${localWorkspaceFolder}",
         "PYTHONWARNINGS": "ignore:::setuptools.command.install,ignore:::setuptools.command.easy_install,ignore:::pkg_resources"
+    },
+     "remoteEnv": {
+        "DISPLAY": ":0",
+        "PATH": "${containerWorkspaceFolder}/scripts:${containerEnv:PATH}"
     },
     
     "postCreateCommand": "sh .devcontainer/postCreate.sh",
@@ -22,9 +28,9 @@
     "runArgs": [
 		"--privileged",
         "--net", "host",
-        "-e", "DISPLAY=${env:DISPLAY}",
+        "-e", "DISPLAY=:0",
 		"-v", "${env:HOME}/.Xauthority:/mnt/.Xauthority",
-        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+        // "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
 	],
     "customizations": {
         "vscode": {

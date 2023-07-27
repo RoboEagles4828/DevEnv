@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 # Change permissions on any joystick devices
-sudo chmod a+rw /dev/input/js*
+# sudo chmod a+rw /dev/input/js*
 source /opt/ros/humble/setup.bash
 
 echo -e "\n----JOYSTICKS CONNECTED----"
@@ -14,9 +14,9 @@ ros2 run joy joy_enumerate_devices
 
 echo -e "\n----COMMANDS----"
 echo "launch          : Launch sim teleop code"
-echo "launch isaac    : Launch sim teleop code"
+# echo "launch isaac    : Launch sim teleop code"
 echo "launch real     : Launch real teleop code"
-echo "launch test_hw  : Launch rviz with teleop code"
+# echo "launch test_hw  : Launch rviz with teleop code"
 echo "restart-ros2    : restart ros2 daemon"
 
 echo -e "\n----Build Command----"
