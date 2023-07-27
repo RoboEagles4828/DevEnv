@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "source /opt/ros/humble/setup.bash"
 
+git config --global core.filemode false
+git config --global user.email "git@swiftcreekrobotics.onmicrosoft.com"
+git config --global user.name "roboeagles"
 git config devcontainers-theme.show-dirty 1
 sed -i 's/ZSH_THEME="devcontainers"/ZSH_THEME="eastwood"/' ~/.zshrc
 
