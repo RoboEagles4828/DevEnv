@@ -6,19 +6,14 @@
         "ROS_DOMAIN_ID": "0",
         "FASTRTPS_DEFAULT_PROFILES_FILE": "/usr/local/share/middleware_profiles/rtps_udp_profile.xml",
         "WORKSPACE_LOCAL_PATH": "${localWorkspaceFolder}",
-        // "containerWorkspaceFolder": "/workspace/DevEnv",
         "PYTHONWARNINGS": "ignore:::setuptools.command.install,ignore:::setuptools.command.easy_install,ignore:::pkg_resources"
     },
-    "remoteEnv": {
-        // "XAUTHORITY": "/tmp/.docker.xauth",
+     "remoteEnv": {
         "DISPLAY": ":0",
         "PATH": "${containerWorkspaceFolder}/scripts:${containerEnv:PATH}"
     },
-    "remoteUser": "root",
-    "updateRemoteUserUID": true,
-    "privileged": true,
-    "overrideCommand": true,    
-    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && sh .devcontainer/postCreate.sh",
+    
+    "postCreateCommand": "sh .devcontainer/postCreate.sh",
     "postStartCommand": " sh .devcontainer/postStart.sh",
     "initializeCommand": "sh .devcontainer/init.sh",
     "securityOpt": [ "seccomp=unconfined" ],
@@ -29,13 +24,11 @@
         "source=${localEnv:HOME}/.ssh,target=/home/admin/.ssh,type=bind" // vscode
     ],
     "runArgs": [
-        "--init",
-        "--name=DevEnv2",
 		"--privileged",
         "--net", "host",
-        // "/dev:/dev",
-        "-e", "DISPLAY=${env:DISPLAY}",
+        "-e", "DISPLAY=:0",
 		"-v", "${env:HOME}/.Xauthority:/mnt/.Xauthority",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
 	],
     "customizations": {
         "vscode": {
@@ -45,7 +38,7 @@
 				"GitHub.copilot",
 				"eamodio.gitlens",
 				"appulate.filewatcher",
-				"formulahendry.code-runner"
+				"formulahendry.code-runner",
 			]
         }
     }
