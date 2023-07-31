@@ -12,6 +12,7 @@
    - vscode
      - dev container extension
      - remote explorer extension
+4) Restart your PC
    
-4) Open the DevEnv folder in vscode and reopen container
+%) Open the DevEnv folder in vscode and reopen container
    - Installs ROS2 Humble docker image
