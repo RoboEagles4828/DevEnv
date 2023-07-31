@@ -17,8 +17,8 @@
 5) If you have an RTX Nvidia GPU
    - Run isaac_setup.ps1 which installs
       - Omniverse Launcher (You must manually install isaac sim inside of the launcher)
-   - ROS2 for windows
-   - Adds isaac extension to your worksapce     
+      - ROS2 for windows
+      - Adds isaac extension to your worksapce     
    
 7) Open the DevEnv folder in vscode and reopen container
    - Installs ROS2 Humble docker image
