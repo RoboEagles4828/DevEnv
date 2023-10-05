@@ -1,23 +1,30 @@
 {
     "name": "DevEnv",
     "image": "ghcr.io/roboeagles4828/developer-environment:7",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/DevEnv,type=bind",
-    "workspaceFolder": "/workspace/DevEnv",
     "containerEnv": {
+        "NVIDIA_VISIBLE_DEVICES": "all",
+        "NVIDIA_DRIVER_CAPABILITIES": "all",
         "SHELL": "/usr/bin/zsh",
+        "ACCEPT_EULA": "Y",
         "ROS_DOMAIN_ID": "0",
+        "OMNI_USER": "admin",
+        "OMNI_PASS": "admin",
+        "OMNI_SERVER": "omniverse://127.0.0.1/NVIDIA/Assets/Isaac/2022.2.1",
         "FASTRTPS_DEFAULT_PROFILES_FILE": "/usr/local/share/middleware_profiles/rtps_udp_profile.xml",
         "WORKSPACE_LOCAL_PATH": "${localWorkspaceFolder}",
+        "ISAAC_LOCAL_STORAGE": "${localEnv:HOME}/docker/isaac-sim",
         "PYTHONWARNINGS": "ignore:::setuptools.command.install,ignore:::setuptools.command.easy_install,ignore:::pkg_resources"
     },
-     "remoteEnv": {
-        "DISPLAY": ":0",
+    "remoteEnv": {
+        "XAUTHORITY": "/tmp/.docker.xauth",
+        "DISPLAY": "${localEnv:DISPLAY}",
         "PATH": "${containerWorkspaceFolder}/scripts:${containerEnv:PATH}"
     },
-    
-    "postCreateCommand": "sh .devcontainer/postCreate.sh",
-    "postStartCommand": " sh .devcontainer/postStart.sh",
-    "initializeCommand": "sh .devcontainer/init.sh",
+    "remoteUser": "admin",
+    "updateRemoteUserUID": true,
+    "postCreateCommand": "./.devcontainer/postCreate.sh",
+    "postStartCommand": "./.devcontainer/postStart.sh",
+    "initializeCommand": "./.devcontainer/init.sh",
     "securityOpt": [ "seccomp=unconfined" ],
     "capAdd": ["SYS_PTRACE"],
     "mounts": [
@@ -26,12 +33,21 @@
         "source=${localEnv:HOME}/.ssh,target=/home/admin/.ssh,type=bind" // vscode
     ],
     "runArgs": [
-		"--privileged",
-        "--net", "host",
-        "-e", "DISPLAY=:0",
-		"-v", "${env:HOME}/.Xauthority:/mnt/.Xauthority",
-        // "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
-	],
+        "--env-file", "${localWorkspaceFolder}/.devcontainer/.env",
+        "-v",
+        "/tmp/.X11-unix:/tmp/.X11-unix:rw",
+        "-v",
+        "/tmp/.docker.xauth:/tmp/.docker.xauth:rw",
+        "-v",
+        "/dev:/dev:rw",
+        "--runtime=nvidia",
+        "--gpus", "all",
+        "--network=host",
+        "--name=DevEnv",
+        "--init"
+    ],
+    "privileged": true,
+    "overrideCommand": false,
     "customizations": {
         "vscode": {
             "extensions": [

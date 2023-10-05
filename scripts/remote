@@ -7,7 +7,7 @@ PURPLE='\033[0;35m'
 NC='\033[0m'
 
 # Check /scripts/config/remote-config for script configuration
-source /workspaces/edna2023/scripts/config/remote-config
+source /workspaces/DevEnv2023/scripts/config/remote-config
 
 smart-deploy() {
     echo "Deploying to $USERNAME@$IP_ADDRESS:$REMOTE_PATH (port $PORT) via rsync..."
@@ -28,14 +28,17 @@ smart-deploy() {
         --exclude edna_debugger \
         --exclude edna_tests \
         --exclude .rsyncmetadata \
-    /workspaces/edna2023/ $USERNAME@$IP_ADDRESS:$REMOTE_PATH \
-        | egrep -v "sending incremental file list" | egrep -v "^\." | awk '{print $2}' | tr ' ' '\n' >> /workspaces/edna2023/.rsyncmetadata
+    /workspaces/DevEnv2023/ $USERNAME@$IP_ADDRESS:$REMOTE_PATH \
+        | egrep -v "sending incremental file list" | egrep -v "^\." | awk '{print $2}' | tr ' ' '\n' > /workspaces/DevEnv2023/.rsyncmetadata
     
     echo "Files that will be changed:"
-    printf '%s\n' $(</workspaces/edna2023/.rsyncmetadata)
+    echo ""
+    printf '%s\n' $(</workspaces/DevEnv2023/.rsyncmetadata)
+    echo ""
 
     read -p "Would you like to sync the files? (y/n) " response
     if [ "$response" != "y" ]; then
+        echo -e "${RED}Aborting...${NC}"
         exit
     fi
 
@@ -54,7 +57,7 @@ smart-deploy() {
         --exclude joy \
         --exclude edna_debugger \
         --exclude edna_tests \
-    /workspaces/edna2023/ $USERNAME@$IP_ADDRESS:$REMOTE_PATH
+    /workspaces/DevEnv2023/ $USERNAME@$IP_ADDRESS:$REMOTE_PATH
     echo -e "${GREEN}Done deploying files to remote${NC}"
 }
 
@@ -174,7 +177,7 @@ help() {
 
 case $1 in 
     "config")
-        nano /workspaces/edna2023/scripts/config/remote-config
+        nano /workspaces/DevEnv2023/scripts/config/remote-config
     ;;
 
     "setup")
