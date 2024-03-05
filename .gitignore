@@ -4,3 +4,4 @@ nvidia_driver_config
 docker/developer/src
 .devcontainer/.env
 .env
+repos/*

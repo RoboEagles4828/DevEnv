@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-IMAGE_NAME="ghcr.io/roboeagles4828/isaac-sim:2022.2.1"
+IMAGE_NAME="ghcr.io/roboeagles4828/isaac-sim:2023.1.0"
 CONTAINTER_NAME="isaac-sim"
 DEFAULT_CMD="/isaac-sim/isaac-sim.sh --allow-root"
 CMD=${@:-$DEFAULT_CMD}
@@ -37,6 +37,8 @@ launch_isaac() {
     -e "DISPLAY=:0" \
     -e "ROS_NAMESPACE=$ROS_NAMESPACE" \
     -e "FASTRTPS_DEFAULT_PROFILES_FILE=/isaac-sim/ros2_workspace/fastdds.xml" \
+    -e "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/isaac-sim/exts/omni.isaac.ros2_bridge/humble/lib" \
+    -e "RMW_IMPLEMENTATION=rmw_fastrtps_cpp" \
     -v /var/run/docker.sock:/var/run/docker.sock:rw \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v /tmp/.docker.xauth:/tmp/.docker.xauth:rw \
