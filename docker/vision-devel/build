@@ -1,10 +1,10 @@
 #!/bin/bash
 
 GITHUB_REGISTRY="ghcr.io/roboeagles4828"
-VERSION="2023.1.1"
-IMAGE_NAME="isaac-sim:$VERSION"
+VERSION="3"
+IMAGE_NAME="vision-devel:$VERSION"
 
-docker build -t $GITHUB_REGISTRY/$IMAGE_NAME --cache-from $GITHUB_REGISTRY/$IMAGE_NAME .
+docker build -t $GITHUB_REGISTRY/$IMAGE_NAME --cache-from $GITHUB_REGISTRY/$IMAGE_NAME . 
 
 echo "Build finished"
 

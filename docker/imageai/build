@@ -1,8 +1,8 @@
 #!/bin/bash
 
-GITHUB_REGISTRY="ghcr.io/roboeagles4828"
-VERSION="2023.1.1"
-IMAGE_NAME="isaac-sim:$VERSION"
+GITHUB_REGISTRY="govind"
+VERSION="1"
+IMAGE_NAME="govind:$VERSION"
 
 docker build -t $GITHUB_REGISTRY/$IMAGE_NAME --cache-from $GITHUB_REGISTRY/$IMAGE_NAME .
 
