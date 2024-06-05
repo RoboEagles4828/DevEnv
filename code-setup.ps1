@@ -1,4 +1,8 @@
-﻿code --install-extension ms-vscode.remote-explorer
+﻿if ((Get-Location).Path -notmatch 'DevEnv$') {
+    Write-Error "This script must be run from the DevEnv directory"
+    exit 1
+}
+code --install-extension ms-vscode.remote-explorer
 code --install-extension ms-vscode-remote.remote-containers
 # Get the path to the settings.json file
 $path = "C:\Users\$env:UserName\AppData\Roaming\Code\User\settings.json"
