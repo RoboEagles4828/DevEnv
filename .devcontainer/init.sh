@@ -10,7 +10,7 @@ mkdir -p ~/docker/vscode
 nvidia_driver_config_path="scripts/config/nvidia_driver_config"
 nvidia_layers=""
 nvidia_icd=""
-_10_nvidia=""ghcr.io/roboeagles4828/developer-environment:8
+_10_nvidia=""
 
 nvidia_layer_loc1=$(find /etc/vulkan -name nvidia_layers.json)
 nvidia_layer_loc2=$(find /usr/share/vulkan -name nvidia_layers.json)

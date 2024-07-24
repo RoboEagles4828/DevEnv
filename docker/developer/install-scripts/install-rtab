@@ -6,7 +6,7 @@ if [ "$INSTALL_RTAB" != "true" ]; then
     exit 0
 fi
 
-# mkdir -p ~/workspaces/rtab_ws/src
+mkdir -p /home/admin/workspaces/rtab_ws/src
 
 # export MAKEFLAGS="-j 4"
 
@@ -19,8 +19,9 @@ echo -e "\e[93mInstalling RTAB\e[0m"
 sudo apt-get install -y ros-humble-rtabmap ros-humble-rtabmap-ros
 
 # source /opt/ros/humble/setup.bash
-# cd ~/workspaces/rtab_ws && \
-#     git clone --branch humble-devel https://github.com/introlab/rtabmap.git src/rtabmap && \
-#     git clone --branch humble-devel https://github.com/introlab/rtabmap_ros.git src/rtabmap_ros && \
-#     rosdep install --from-paths src --ignore-src -r -y && \
-#     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --executor sequential
+cd /home/admin/workspaces/rtab_ws && \
+    git clone --branch humble-devel https://github.com/introlab/rtabmap.git src/rtabmap && \
+    git clone --branch humble-devel https://github.com/introlab/rtabmap_ros.git src/rtabmap_ros && \
+    source /opt/ros/humble/setup.bash && \
+    rosdep install --from-paths src --ignore-src -r -y && \
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --executor sequential

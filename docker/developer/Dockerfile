@@ -1,14 +1,15 @@
-ARG BASE_IMAGE=osrf/ros:humble-desktop
-FROM $BASE_IMAGE
+FROM nvcr.io/nvidia/cuda:12.5.0-devel-ubuntu22.04
 RUN mkdir -p /opt/install-scripts
+ARG INSTALL_ROS="true"
 ARG INSTALL_COMMON="true"
 ARG INSTALL_DOCKER="true"
 ARG INSTALL_RTAB="true"
-ARG INSTALL_PYTHON_DEPS="true"
+
 
 ######################
 # User configuration #
 ######################
+ENV DEBIAN_FRONTEND=noninteractive
 
 ARG USERNAME=admin
 ARG USER_UID=1000
@@ -34,6 +35,15 @@ RUN echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
 ENV USERNAME=${USERNAME}
 ENV USER_GID=${USER_GID}
 ENV USER_UID=${USER_UID}
+
+#############
+# ROS Setup #
+#############
+
+# Copy and install ROS
+COPY install-scripts/install-ros /opt/install-scripts/install-ros
+RUN chmod +x /opt/install-scripts/install-ros
+RUN /opt/install-scripts/install-ros ${INSTALL_ROS}
 
 ################
 # Config Setup #
@@ -77,25 +87,6 @@ RUN sudo apt update && sudo apt-get install -y python3-pip
 RUN sudo /opt/install-scripts/install-rtab ${INSTALL_RTAB}
 USER root
 
-####################
-# Preload ROS Deps #
-####################
-
-# Copy and install workspace rosdeps
-COPY install-scripts/install-rosdeps /opt/install-scripts/install-rosdeps
-RUN chmod +x /opt/install-scripts/install-rosdeps
-COPY src /tmp/src
-USER ${USERNAME}
-RUN /opt/install-scripts/install-rosdeps
-USER root
-RUN mkdir -p '/opt/workspace'
-
-#######################
-# Install Python deps #
-#######################
-COPY install-scripts/install-python-deps /opt/install-scripts/install-python-deps
-RUN chmod +x /opt/install-scripts/install-python-deps
-RUN /opt/install-scripts/install-python-deps ${INSTALL_PYTHON_DEPS}
 
 ######################
 # Install Git Extras #

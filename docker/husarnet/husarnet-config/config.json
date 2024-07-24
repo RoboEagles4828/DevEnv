@@ -1,0 +1,19 @@
+{
+    "host-table": {
+        "husarnet-local": "fc94:3246:bb2c:45ec:7ff0:ae7b:c3f3:51c9",
+        "master": "fc94:3246:bb2c:45ec:7ff0:ae7b:c3f3:51c9",
+        "my-app-d": "fc94:3246:bb2c:45ec:7ff0:ae7b:c3f3:51c9",
+        "my-app-deployment": "fc94:81e1:e7af:cfa2:79b8:ab53:0dfa:e267",
+        "my-app-deployment2": "fc94:c570:75d5:b438:13af:8ccf:a368:f1e2"
+    },
+    "internal-settings": {
+        "websetupSecret": "70686364796278786f69796f"
+    },
+    "user-settings": {},
+    "whitelist": [
+        "fc94:b01d:1803:8dd8:b293:5c7d:7639:932a",
+        "fc94:c570:75d5:b438:13af:8ccf:a368:f1e2",
+        "fc94:3246:bb2c:45ec:7ff0:ae7b:c3f3:51c9",
+        "fc94:81e1:e7af:cfa2:79b8:ab53:0dfa:e267"
+    ]
+}

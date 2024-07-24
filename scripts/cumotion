@@ -1,0 +1,35 @@
+#!/bin/bash
+DOCKER_ARGS=()
+DOCKER_ARGS+=("-v /tmp/.X11-unix:/tmp/.X11-unix")
+DOCKER_ARGS+=("-v $HOME/.Xauthority:/home/admin/.Xauthority:rw")
+DOCKER_ARGS+=("-e DISPLAY")
+DOCKER_ARGS+=("-e NVIDIA_VISIBLE_DEVICES=all")
+DOCKER_ARGS+=("-e NVIDIA_DRIVER_CAPABILITIES=all")
+DOCKER_ARGS+=("-e FASTRTPS_DEFAULT_PROFILES_FILE=/usr/local/share/middleware_profiles/rtps_udp_profile.xml")
+DOCKER_ARGS+=("-e ROS_DOMAIN_ID")
+DOCKER_ARGS+=("-e USER")
+DOCKER_ARGS+=("-e ISAAC_ROS_WS=/workspaces/isaac_ros-dev")
+docker run -it --rm \
+    --privileged \
+    --network host \
+    ${DOCKER_ARGS[@]} \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME/.Xauthority:/home/admin/.Xauthority:rw \
+    -e DISPLAY \
+    -e NVIDIA_VISIBLE_DEVICES=all \
+    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    -e FASTRTPS_DEFAULT_PROFILES_FILE=/usr/local/share/middleware_profiles/rtps_udp_profile.xml \
+    -e ROS_DOMAIN_ID \
+    -e USER \
+    -e ISAAC_ROS_WS=/workspaces/isaac_ros-dev \
+    -v ~/Documents/isaac_ros-dev:/workspaces/isaac_ros-dev \
+    -v ~/Documents/DevEnv/repos/adam/src/adam_moveit:/workspaces/isaac_ros-dev/adam/src/adam_moveit \
+    -v ~/Documents/DevEnv/repos/adam/src/adam_description:/workspaces/isaac_ros-dev/adam/src/adam_description \
+    -v /etc/localtime:/etc/localtime:ro \
+    --name "$CONTAINER_NAME" \
+    --runtime nvidia \
+    --user="admin" \
+    --entrypoint /usr/local/bin/scripts/workspace-entrypoint.sh \
+    --workdir /workspaces/isaac_ros-dev \
+    ghcr.io/roboeagles4828/cumotion:1 \
+    /bin/bash

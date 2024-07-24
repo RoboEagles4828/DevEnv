@@ -63,7 +63,8 @@ install_debian_packages() {
         manpages \
         manpages-dev \
         libnss3 \
-        init-system-helpers"
+        init-system-helpers \
+        tzdata"
 
     # Include libssl1.1 if available
     if [[ ! -z $(apt-cache --names-only search ^libssl1.1$) ]]; then
